@@ -6,6 +6,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using GameServer.Models;
+using GameClient.Decorator;
 
 namespace GameClient
 {
@@ -96,7 +97,14 @@ namespace GameClient
         static void Main()
         {
             Console.WriteLine("Web API Client says: \"Hello World!\"");
-            RunAsync().GetAwaiter().GetResult();
+            EmptyMapComponent e = new EmptyMapComponent();
+            e.draw(0, 0);
+            PlayerDecorator pd = new PlayerDecorator(e);
+            pd.draw(5, 6);
+
+            EnemyDecorator ed = new EnemyDecorator(e);
+            Console.ReadKey();
+            
         }
 
         static async Task RunAsync()
